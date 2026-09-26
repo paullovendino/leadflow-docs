@@ -39,7 +39,7 @@ Depends on Phase 1 users and roles.
 - Lead records
 - Assignment and stage movement
 - Notes and activity history
-- Authenticated CRM screens (`/leads`, `/leads/:id`, `/pipeline`)
+- Authenticated CRM screens (`/admin/leads`, `/admin/leads/:id`, `/admin/pipeline`)
 
 Depends on users, services, and the role model.
 
@@ -48,30 +48,31 @@ Depends on users, services, and the role model.
 - Customer records
 - Explicit Lead → Customer conversion
 - Customer notes and activities
-- Authenticated screens (`/customers`, `/customers/:id`)
+- Authenticated screens (`/admin/customers`, `/admin/customers/:id`)
 
 Depends on Phase 3 leads and pipeline stages.
 
-## Phase 5A — Appointments and scheduling (current)
+## Phase 5A — Appointments and scheduling
 
 - Appointment CRUD against customers
 - Service-duration end times
 - Staff availability and overlap validation
 - Status lifecycle
-- Authenticated screens (`/appointments`, `/appointments/:id`)
+- Authenticated screens (`/admin/appointments`, `/admin/appointments/:id`)
 - Customer detail appointment history
 
 Depends on customers, services, and staff availability.
 
 A full calendar UI, reminders, recurrence, and public booking remain later work.
 
-## Phase 5 — Public lead form (still deferred)
+## Phase 5B — Public landing page and lead capture (current)
 
-- Unauthenticated lead capture
-- Default stage assignment
-- Validation and abuse protection
+- Unauthenticated landing page at `/`
+- `GET /api/v1/public/services` and `POST /api/v1/public/leads`
+- Server-controlled `website` source, New stage, unassigned lead
+- Validation, honeypot, and `public-leads` rate limiting
 
-Depends on Phase 3. Originally numbered Phase 5; appointments were implemented first as Phase 5A.
+Depends on Phase 3. Originally numbered Phase 5; appointments were implemented first as Phase 5A. Public booking remains later work.
 
 ## Phase 6 — Calendar visualization
 

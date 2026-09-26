@@ -14,7 +14,7 @@ Stored on `users.role` as a string, cast to `App\Enums\UserRole`.
 
 ## Current enforcement
 
-Phase 5A enforces catalog, lead, customer, and appointment policies on the backend.
+Phase 5A enforces catalog, lead, customer, and appointment policies on the backend. Phase 5B adds two unauthenticated public endpoints that create or list only public-safe data; they do not grant CRM access.
 
 - `users.role` with a PostgreSQL check constraint
 - `users.is_active` for deactivation instead of user soft deletes
@@ -49,6 +49,15 @@ Administrators cannot deactivate or demote the last active administrator. That r
 Staff customer visibility is derived from assigned related leads. Staff cannot create customers directly; they convert assigned leads.
 
 Staff see an appointment when they are the assigned `staff_user_id` or when they can view the customer. Staff may create an appointment only for a customer they can view. Administrators are never bookable staff.
+
+## Public access
+
+Visitors do not receive a role. They may:
+
+- Read active services through `GET /api/v1/public/services`
+- Create a lead through `POST /api/v1/public/leads`
+
+They cannot list CRM leads, assign staff, choose a pipeline stage, create customers, or book appointments. Website leads remain unassigned until an authenticated operator picks them up.
 
 ## Inactive users
 

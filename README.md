@@ -17,9 +17,10 @@ This directory is the source of truth for product scope, architecture, and imple
 11. [Phase 3 — Leads, CRM, and pipeline](11-phase-3-leads-crm-pipeline.md)
 12. [Phase 4 — Customers and lead conversion](12-phase-4-customers-lead-conversion.md)
 13. [Phase 5A — Appointments and scheduling](13-phase-5-appointments.md)
+14. [Phase 5B — Public landing page and lead capture](14-phase-5b-public-lead-capture.md)
 
 ## How to use these docs
 
 - Read the phase plan before implementing a feature.
 - Update the relevant document in the same change that alters a convention.
-- Domain entities in later phases are documented as intent until that phase lands. Phase 5A implements appointments against customers.
+- Domain entities in later phases are documented as intent until that phase lands. Phase 5A implements appointments against customers. Phase 5B adds the public landing page.

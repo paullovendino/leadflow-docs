@@ -71,9 +71,9 @@ Customer list does not eager-load notes, activities, or leads.
 
 ## Frontend
 
-- `/customers` — table, search, source filter, create (managers/admins)
-- `/customers/:id` — edit, related leads, notes, activity
-- `/leads/:id` — Convert to Customer confirmation, or View customer when already converted
+- `/admin/customers` — table, search, source filter, create (managers/admins)
+- `/admin/customers/:id` — edit, related leads, notes, activity
+- `/admin/leads/:id` — Convert to Customer confirmation, or View customer when already converted
 
 ## Deferred
 

@@ -1,6 +1,6 @@
 # Phase 3 — Leads, CRM, and pipeline
 
-Phase 3 adds the CRM foundation: one default pipeline, database-backed stages, leads, polymorphic notes, and polymorphic activities. Appointments, customers, public lead capture, and integrations remain out of scope.
+Phase 3 adds the CRM foundation: one default pipeline, database-backed stages, leads, polymorphic notes, and polymorphic activities. Customers landed in Phase 4, appointments in Phase 5A, and public lead capture in Phase 5B. Integrations remain out of scope.
 
 ## Entities
 
@@ -108,9 +108,9 @@ List responses eager-load `service`, `assignedUser`, and `pipelineStage`. Notes 
 
 Authenticated routes:
 
-- `/leads` — table, search, filters, pagination, create
-- `/leads/:id` — details, assignment, stage change, notes, activity
-- `/pipeline` — Kanban columns from the API, optional stage management for managers/admins
+- `/admin/leads` — table, search, filters, pagination, create
+- `/admin/leads/:id` — details, assignment, stage change, notes, activity
+- `/admin/pipeline` — Kanban columns from the API, optional stage management for managers/admins
 
 ## Future extension points
 

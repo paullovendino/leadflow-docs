@@ -59,8 +59,8 @@ Do **not** put CRM, scheduling, or integration logic in controllers.
 ### API
 
 - `app/Enums`
-- `app/Http/Controllers/Api/V1`
-- `app/Http/Requests/Api/V1`
+- `app/Http/Controllers/Api/V1` (public capture under `PublicApi`)
+- `app/Http/Requests/Api/V1` (public capture under `PublicApi`)
 - `app/Http/Resources/Api/V1`
 - `app/Http/Middleware`
 - `app/Services`
@@ -72,9 +72,10 @@ Do **not** put CRM, scheduling, or integration logic in controllers.
 
 - `src/lib/http.ts` — Axios client with credentials and CSRF
 - `src/stores` — Pinia stores
-- `src/views` — route-level pages
+- `src/views` — route-level pages (`views/public` for the landing page)
+- `src/components/public` — public lead form
 - `src/types` — shared TypeScript contracts
-- `src/router` — auth-aware routing
+- `src/router` — `/` is public; staff login is `/admin`; authenticated CRM starts at `/admin/dashboard`
 
 ## Extensibility
 

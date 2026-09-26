@@ -34,11 +34,15 @@ Axios is configured with `withCredentials` and `withXSRFToken`.
 
 `Gate::before` grants administrators every gate/policy ability. Route middleware still requires authentication.
 
+## Public endpoints
+
+`GET /api/v1/public/services` and `POST /api/v1/public/leads` do not require a session. The SPA still fetches `/sanctum/csrf-cookie` before the public POST because the API is stateful. Those routes do not authenticate the visitor and do not return CRM collections.
+
 ## SPA client rules
 
 - Store the current user in Pinia for UI only
 - Never treat a frontend role check as security
-- On 401, clear local auth state and send the user to login
+- On 401, clear local auth state and send the user to `/admin`
 
 ## CSRF and CORS
 

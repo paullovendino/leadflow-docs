@@ -109,7 +109,7 @@ Published by Sanctum. Unused by the SPA.
 - timestamps
 - `created_at` indexed
 
-Leads are not hard-deleted in Phase 3.
+Leads are not hard-deleted in Phase 3. Phase 5B public capture writes the same `leads` and `activities` tables; it adds no columns or migrations. Website submissions store `source = website`, the default `new` stage, and `assigned_user_id = null`.
 
 ### customers
 

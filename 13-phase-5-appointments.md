@@ -2,7 +2,7 @@
 
 Phase 5A adds the first complete appointments domain. Public booking, Google Calendar, reminders, recurring series, and a full calendar UI remain future work.
 
-The original phase plan listed a public lead form as Phase 5. That work is still deferred. This document records the appointments implementation that landed next after Phase 4.
+The original phase plan listed a public lead form as Phase 5. That work landed as [Phase 5B](14-phase-5b-public-lead-capture.md). This document records the appointments implementation that landed next after Phase 4.
 
 ## Entities
 
@@ -125,9 +125,9 @@ Metadata is limited to `appointment_id`, `service_id`, `staff_user_id`, and stat
 ## Frontend
 
 - Workspace nav: Appointments
-- `/appointments` — filters, table, create drawer, in-place insert on page 1
-- `/appointments/:id` — details, allowed status actions, reschedule, activity
-- `/customers/:id` — upcoming and recent appointments replace the Phase 4 placeholder
+- `/admin/appointments` — filters, table, create drawer, in-place insert on page 1
+- `/admin/appointments/:id` — details, allowed status actions, reschedule, activity
+- `/admin/customers/:id` — upcoming and recent appointments replace the Phase 4 placeholder
 
 Loading labels: `Creating...`, `Rescheduling...`, `Confirming...`, `Completing...`, `Cancelling...`. Failed requests leave the form open.
 
@@ -146,7 +146,6 @@ Loading labels: `Creating...`, `Rescheduling...`, `Confirming...`, `Completing..
 
 ## Future work
 
-- Public lead form (original Phase 5)
 - Lightweight day/week schedule visualization
 - Reminders and no-show follow-up
 - Recurring appointments

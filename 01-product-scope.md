@@ -6,7 +6,9 @@ LeadFlow helps appointment-based businesses capture leads, manage a CRM pipeline
 
 Core workflow:
 
-Landing Page → Lead Form → Lead → CRM → Pipeline → Appointment → Customer → Appointment History
+Landing Page → Lead Form → Lead → CRM → Pipeline → Customer → Appointment → Appointment History
+
+Phase 5B implements the public landing page and lead form. Public booking is still later work; appointments are created inside the authenticated CRM after follow-up.
 
 ## In scope for V1
 

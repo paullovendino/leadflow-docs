@@ -1,6 +1,6 @@
 # Domain model
 
-This is the intended V1 domain. Phase 5A implements `User`, `Service`, `StaffAvailability`, `Pipeline`, `PipelineStage`, `Lead`, `Customer`, `Appointment`, `Activity`, and `Note`.
+This is the intended V1 domain. Phase 5A implements `User`, `Service`, `StaffAvailability`, `Pipeline`, `PipelineStage`, `Lead`, `Customer`, `Appointment`, `Activity`, and `Note`. Phase 5B reuses `Lead` and `Activity` for unauthenticated website capture — there is no separate public-lead model.
 
 ## Entities
 
@@ -61,6 +61,8 @@ Expected fields:
 Lead sources:
 
 `website`, `facebook`, `instagram`, `referral`, `google`, `walk_in`, `other`
+
+Public landing submissions always store `website`. The visitor cannot choose a source, pipeline stage, or assignee. Website leads start unassigned on the default pipeline’s `new` stage.
 
 ## Default pipeline stages
 

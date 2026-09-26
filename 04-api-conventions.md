@@ -98,6 +98,8 @@ API routes always render JSON, including validation and authentication failures.
 
 | Method | Path | Auth | Purpose |
 | --- | --- | --- | --- |
+| GET | `/api/v1/public/services` | Guest | Active services (public-safe fields) |
+| POST | `/api/v1/public/leads` | Guest, `throttle:public-leads` | Create a website lead |
 | POST | `/api/v1/auth/login` | Guest, throttled | Create session |
 | POST | `/api/v1/auth/logout` | Sanctum + active | Destroy session |
 | GET | `/api/v1/auth/user` | Sanctum + active | Current user |
@@ -159,4 +161,4 @@ V1 uses integer primary keys with backend authorization. The API must not leak r
 
 - Login: 5 attempts per minute per email + IP (`throttle:auth`)
 - Authenticated API: 60 requests per minute (`throttle:api`)
-- Public lead submission will get a dedicated limiter in its phase
+- Public lead submission: 10 requests per minute per IP (`throttle:public-leads`)

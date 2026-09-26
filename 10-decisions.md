@@ -144,6 +144,24 @@ Bookable users are active `staff` or `manager` accounts, matching availability a
 
 Past-date validation uses `config('app.timezone')` and `now()`. LeadFlow currently keeps the existing app timezone rather than introducing a Philippines-specific scheduling clock.
 
+## ADR-036: Public capture reuses Lead, not a PublicLead model
+
+Website inquiries are normal `leads` rows. A second model would split the CRM inbox and duplicate pipeline/activity rules. Public HTTP types live under `PublicApi` because PHP reserves `Public` as a namespace segment.
+
+## ADR-037: Dedicated public lead factory
+
+`LeadService::createPublicLead()` does not call `createLead()`. The authenticated path can auto-assign staff and accept a source. The public path always stores `website`, the default `new` stage, and `assigned_user_id = null`.
+
+## ADR-038: Public catalog endpoint
+
+`GET /api/v1/services` stays authenticated. The landing page uses `GET /api/v1/public/services` so visitors never receive inactive services or internal service fields.
+
+## ADR-039: Landing at `/`, CRM under `/admin`
+
+`/` is the public marketing page. Staff login is `/admin`. Authenticated CRM screens live under `/admin/dashboard`, `/admin/leads`, `/admin/pipeline`, `/admin/customers`, `/admin/appointments`, `/admin/staff`, `/admin/services`, and `/admin/availability`.
+
+The public site does not expose a staff login link. Authenticated operators can still open `/` to preview the marketing page. Logout returns to `/admin`. API routes remain `/api/v1/...`.
+
 ## Environment notes
 
 - PHP 8.3.32 is available via XAMPP (`C:\xampp\php\php.exe`)
