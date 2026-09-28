@@ -142,7 +142,7 @@ Bookable users are active `staff` or `manager` accounts, matching availability a
 
 ## ADR-035: Application timezone for past-date checks
 
-Past-date validation uses `config('app.timezone')` and `now()`. LeadFlow currently keeps the existing app timezone rather than introducing a Philippines-specific scheduling clock.
+Past-date validation uses `config('app.timezone')` and `now()`. Phase 7 made `APP_TIMEZONE` the canonical source (`config/app.php` reads `env('APP_TIMEZONE', 'UTC')`). Local development and tests use `Asia/Manila` so dashboard “today” and appointment past checks share one clock.
 
 ## ADR-036: Public capture reuses Lead, not a PublicLead model
 
@@ -177,6 +177,10 @@ Appointment creation remains an explicit Customer action and is separate from Le
 Concurrency: create and reschedule lock occupying rows for that staff member and date (`lockForUpdate`) before the application-level overlap check. There is no unique time-slot constraint, because cancelled appointments must be able to free a slot. All statuses except `cancelled` occupy the interval.
 
 The appointment form may lock the Customer field when opened from a qualified Lead or Customer Detail. That lock is UI context, not a database constraint.
+
+## ADR-042: Dashboard metrics use a dedicated aggregate endpoint
+
+`GET /api/v1/dashboard` runs scoped counts in `DashboardService`. The SPA must not compose dashboard totals from paginated CRM list endpoints (`per_page=1` + `meta.total`). Staff visibility matches existing lead, customer, and appointment list rules.
 
 ## Environment notes
 

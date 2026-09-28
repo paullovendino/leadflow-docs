@@ -121,7 +121,7 @@ API routes always render JSON, including validation and authentication failures.
 | PATCH | `/api/v1/users/{user}/availabilities/{availability}` | Sanctum + active | Update availability |
 | POST | `/api/v1/users/{user}/availabilities/{availability}/activate` | Sanctum + active | Activate availability |
 | POST | `/api/v1/users/{user}/availabilities/{availability}/deactivate` | Sanctum + active | Deactivate availability |
-| GET | `/api/v1/leads` | Sanctum + active | List leads (staff: assigned only) |
+| GET | `/api/v1/dashboard` | Sanctum + active | Operational metrics (staff: scoped) |
 | POST | `/api/v1/leads` | Sanctum + active | Create lead |
 | GET | `/api/v1/leads/{lead}` | Sanctum + active | View lead |
 | PATCH | `/api/v1/leads/{lead}` | Sanctum + active | Update lead |

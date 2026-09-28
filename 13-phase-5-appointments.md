@@ -140,7 +140,7 @@ Phase 6 adds `tests/Feature/Appointments/AppointmentWorkflowTest.php` (qualify â
 
 ## Known limitations
 
-- App timezone remains the existing Laravel timezone (`UTC` unless changed). Past-date checks use that clock, not a Philippines-specific timezone.
+- App timezone is `config('app.timezone')` from `APP_TIMEZONE` (Phase 7: `Asia/Manila` in local `.env` and PHPUnit). Past-date checks use that clock.
 - Slots are 30-minute increments inside weekday windows. There is no week/month calendar view.
 - Service and user lookups still use the existing 15-row catalog pages.
 - Staff create-form staff picker is self-only because `/users` is manager/admin.

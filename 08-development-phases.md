@@ -84,7 +84,7 @@ Depends on Phase 3. Originally numbered Phase 5; appointments were implemented f
 
 Depends on Phase 3 leads and Phase 4 customers.
 
-## Phase 6 — Appointment and calendar workflow (current)
+## Phase 6 — Appointment and calendar workflow
 
 - Customer preselected when booking from a qualified lead or customer detail
 - Upcoming / past appointments on customer detail
@@ -96,11 +96,16 @@ Depends on Phase 3 leads and Phase 4 customers.
 
 Depends on Phase 5A appointments and Phase 5C qualification. Qualification still does not create an appointment. A day/week calendar view, Google Calendar, reminders, email/SMS, n8n, and public booking remain later work.
 
-## Phase 7 — Dashboard
+## Phase 7 — Dashboard and operational metrics (current)
 
-- Lead and appointment operational metrics
+- Dedicated `GET /api/v1/dashboard` aggregate
+- Overview: total / currently qualified / currently converted leads, customers
+- Appointment today, upcoming, and status counts
+- Dynamic pipeline and lead-source bars
+- Recent leads and recent activity (server-scoped)
+- Application timezone from `APP_TIMEZONE` (`Asia/Manila`)
 
-Depends on a stable data model from Phases 3–6.
+Depends on Phases 3–6 data. Staff metrics stay scoped. A day/week calendar, Google Calendar, reminders, email/SMS, n8n, public booking, and API performance work remain later.
 
 ## Phase 8 — Integrations (explicit request only)
 
