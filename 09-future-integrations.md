@@ -46,3 +46,5 @@ Do not add a webhook dispatcher now.
 ## Constraint for current work
 
 Avoid schema or API choices that hard-wire LeadFlow to a single calendar vendor, mail vendor, or automation tool.
+
+Phase 6 did not implement Google Calendar, Google OAuth, n8n, email, SMS, reminders, public booking, or automated follow-ups. Those remain later work.

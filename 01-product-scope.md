@@ -8,7 +8,7 @@ Core workflow:
 
 Landing Page → Lead Form → Lead → CRM → Pipeline → Customer → Appointment → Appointment History
 
-Phase 5B implements the public landing page and lead form. Public booking is still later work; appointments are created inside the authenticated CRM after follow-up.
+Phase 5B implements the public landing page and lead form. Appointments are created inside the authenticated CRM after follow-up. Public booking, reminders, and a day/week calendar view remain later work.
 
 ## In scope for V1
 
@@ -17,7 +17,7 @@ Phase 5B implements the public landing page and lead form. Public booking is sti
 - Database-backed pipeline stages
 - Staff assignment
 - Lead-to-customer conversion
-- Services, staff availability, and internal calendar
+- Services, staff availability, and internal appointment scheduling (list plus slot picker; not a day/week calendar view)
 - Appointment scheduling with conflict detection
 - Role-based authorization
 - Operational dashboard metrics

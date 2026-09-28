@@ -139,6 +139,8 @@ Customers are not hard-deleted in Phase 4.
 
 Appointments are not hard-deleted in Phase 5A. Cancelled rows remain for history and no longer occupy a slot.
 
+There is no unique constraint on `(staff_user_id, scheduled_date, start_time)`. Overlap is enforced in `AppointmentService`. Phase 6 added no appointment migrations.
+
 ### activities
 
 - `id` bigint PK

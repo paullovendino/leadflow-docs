@@ -131,6 +131,7 @@ API routes always render JSON, including validation and authentication failures.
 | POST | `/api/v1/leads/{lead}/notes` | Sanctum + active | Add note |
 | GET | `/api/v1/leads/{lead}/activities` | Sanctum + active | List activities, newest first |
 | POST | `/api/v1/leads/{lead}/convert` | Sanctum + active | Convert lead to customer |
+| POST | `/api/v1/leads/{lead}/qualify` | Sanctum + active | Qualify contacted lead and find/create customer (does not create an appointment) |
 | GET | `/api/v1/customers` | Sanctum + active | List customers (staff: related only) |
 | POST | `/api/v1/customers` | Sanctum + active, manager/admin | Create customer |
 | GET | `/api/v1/customers/{customer}` | Sanctum + active | View customer |
@@ -139,7 +140,7 @@ API routes always render JSON, including validation and authentication failures.
 | POST | `/api/v1/customers/{customer}/notes` | Sanctum + active | Add note |
 | GET | `/api/v1/customers/{customer}/activities` | Sanctum + active | List activities, newest first |
 | GET | `/api/v1/appointments` | Sanctum + active | List appointments (staff: scoped) |
-| POST | `/api/v1/appointments` | Sanctum + active | Create appointment |
+| POST | `/api/v1/appointments` | Sanctum + active | Create appointment (`scheduled`; application-level overlap check) |
 | GET | `/api/v1/appointments/slots` | Sanctum + active | Suggested available start times |
 | GET | `/api/v1/appointments/{appointment}` | Sanctum + active | View appointment |
 | PATCH | `/api/v1/appointments/{appointment}` | Sanctum + active | Reschedule or update notes |

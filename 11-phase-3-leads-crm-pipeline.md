@@ -1,6 +1,6 @@
 # Phase 3 — Leads, CRM, and pipeline
 
-Phase 3 adds the CRM foundation: one default pipeline, database-backed stages, leads, polymorphic notes, and polymorphic activities. Customers landed in Phase 4, appointments in Phase 5A, and public lead capture in Phase 5B. Integrations remain out of scope.
+Phase 3 adds the CRM foundation: one default pipeline, database-backed stages, leads, polymorphic notes, and polymorphic activities. Customers landed in Phase 4, appointments in Phase 5A, public lead capture in Phase 5B, qualification linking in Phase 5C, and appointment booking refinements in Phase 6. Integrations remain out of scope.
 
 ## Entities
 
@@ -91,7 +91,7 @@ Creating a note also writes a `note_added` activity in the same transaction.
 | GET | `/api/v1/leads/{lead}` | Lead detail, notes, activities |
 | PATCH | `/api/v1/leads/{lead}` | Update lead (assignment/stage reuse service methods) |
 | PATCH | `/api/v1/leads/{lead}/assignment` | Assign or unassign |
-| PATCH | `/api/v1/leads/{lead}/stage` | Move stage |
+| PATCH | `/api/v1/leads/{lead}/stage` | Move stage (not into Qualified; use `/qualify`) |
 | GET | `/api/v1/leads/{lead}/notes` | List notes |
 | POST | `/api/v1/leads/{lead}/notes` | Add note |
 | GET | `/api/v1/leads/{lead}/activities` | Timeline, newest first |
@@ -120,3 +120,5 @@ Do not implement these in Phase 3:
 - Customer conversion
 - Appointments and calendar
 - n8n, email, SMS, Google Calendar, webhooks
+
+Later phases implemented public capture, customers, qualification, and appointments (see [13](13-phase-5-appointments.md), [14](14-phase-5b-public-lead-capture.md), [15](15-phase-5c-lead-qualification.md), [16](16-phase-6-appointment-calendar-workflow.md)). A day/week calendar view, Google Calendar, and notifications remain deferred.

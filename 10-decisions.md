@@ -122,7 +122,7 @@ Phase 4 only prevents converting the same lead twice. Fuzzy matching and merges 
 
 ## ADR-030: Appointments attach only to customers
 
-Booking uses `Lead → Customer → Appointments`. Unconverted leads cannot be scheduled. This avoids a second appointment identity and keeps history on the customer record.
+Booking uses `Lead → Customer → Appointments`. A Lead without a linked Customer cannot be scheduled. Walk-in Customers (no originating Lead) can still be booked. This avoids a second appointment identity and keeps history on the Customer record.
 
 ## ADR-031: Backend calculates appointment end time
 
@@ -161,6 +161,22 @@ Website inquiries are normal `leads` rows. A second model would split the CRM in
 `/` is the public marketing page. Staff login is `/admin`. Authenticated CRM screens live under `/admin/dashboard`, `/admin/leads`, `/admin/pipeline`, `/admin/customers`, `/admin/appointments`, `/admin/staff`, `/admin/services`, and `/admin/availability`.
 
 The public site does not expose a staff login link. Authenticated operators can still open `/` to preview the marketing page. Logout returns to `/admin`. API routes remain `/api/v1/...`.
+
+## ADR-040: Qualification is a dedicated customer-linking action
+
+`POST /api/v1/leads/{lead}/qualify` is the only way to move a lead to `qualified`. The UI confirms first. The service matches customers by case-insensitive email and digit-normalized phone, links one match or creates a customer, and records `lead_qualified`. Conflicting matches return `422`. Convert still always creates a new customer at `converted`. Appointments stay a separate action.
+
+This supersedes ADR-029 for the qualification path. Convert does not match duplicates.
+
+## ADR-041: Booking is always Customer → Appointment
+
+Phase 6 keeps appointments on the Customer. Qualified Leads and walk-in Customers use the same `POST /api/v1/appointments` endpoint. There is no `appointments.lead_id`.
+
+Appointment creation remains an explicit Customer action and is separate from Lead qualification. Qualify and convert create or link a Customer only. They never book.
+
+Concurrency: create and reschedule lock occupying rows for that staff member and date (`lockForUpdate`) before the application-level overlap check. There is no unique time-slot constraint, because cancelled appointments must be able to free a slot. All statuses except `cancelled` occupy the interval.
+
+The appointment form may lock the Customer field when opened from a qualified Lead or Customer Detail. That lock is UI context, not a database constraint.
 
 ## Environment notes
 

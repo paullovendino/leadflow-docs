@@ -179,10 +179,10 @@ No migrations. Public capture reuses `leads` and `activities`.
 
 ## Future booking flow
 
-A later phase can add public booking after the lead (or a converted customer) exists:
+A later phase can add public booking after the lead (or a linked customer) exists:
 
 ```
-Public request → Lead → Staff follow-up → Customer → Appointment
+Public request → Lead → Staff follow-up → Qualify/convert → Customer → Book appointment
 ```
 
-Do not attach appointments to unconverted public leads.
+Do not attach appointments to public leads. Phase 6 still books only against Customers; qualification does not create an appointment.

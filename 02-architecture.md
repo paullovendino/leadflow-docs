@@ -65,7 +65,7 @@ Do **not** put CRM, scheduling, or integration logic in controllers.
 - `app/Http/Middleware`
 - `app/Services`
 - `app/Models`
-- `app/Policies` for User, Service, StaffAvailability, Lead, Pipeline, PipelineStage, and Customer
+- `app/Policies` for User, Service, StaffAvailability, Lead, Pipeline, PipelineStage, Customer, and Appointment
 - `routes/api.php`
 
 ### SPA

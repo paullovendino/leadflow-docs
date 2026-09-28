@@ -18,9 +18,11 @@ This directory is the source of truth for product scope, architecture, and imple
 12. [Phase 4 — Customers and lead conversion](12-phase-4-customers-lead-conversion.md)
 13. [Phase 5A — Appointments and scheduling](13-phase-5-appointments.md)
 14. [Phase 5B — Public landing page and lead capture](14-phase-5b-public-lead-capture.md)
+15. [Phase 5C — Lead qualification and customer linking](15-phase-5c-lead-qualification.md)
+16. [Phase 6 — Appointment and calendar workflow](16-phase-6-appointment-calendar-workflow.md)
 
 ## How to use these docs
 
 - Read the phase plan before implementing a feature.
 - Update the relevant document in the same change that alters a convention.
-- Domain entities in later phases are documented as intent until that phase lands. Phase 5A implements appointments against customers. Phase 5B adds the public landing page.
+- Domain entities in later phases are documented as intent until that phase lands. Phase 5A implements appointments against customers. Phase 5B adds the public landing page. Phase 5C makes Contacted → Qualified an explicit qualify action (it does not book). Phase 6 makes Customer → Book appointment the reliable next step. Phase 6 did not add a day/week calendar view, public booking, or new appointment endpoints.

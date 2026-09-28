@@ -17,9 +17,10 @@ The original phase plan listed a public lead form as Phase 5. That work landed a
 
 ```
 Lead → Customer → Appointments
+Customer → Appointments   (walk-in / manual create; no originating Lead required)
 ```
 
-Appointments attach only to customers. An unconverted lead cannot be booked. After conversion, schedule against the resulting customer.
+Appointments attach only to customers. A lead without a `customer_id` cannot be booked. After qualification, conversion, or manual customer create, schedule against that customer.
 
 This is intentional. A second appointment identity on leads would duplicate customer history.
 
@@ -60,7 +61,7 @@ completed / cancelled / no_show → (none)
 - End time is calculated from `Service.duration_minutes`. The frontend cannot set duration.
 - New appointments and reschedules cannot start in the past (application timezone).
 - The interval must fit inside an active availability window for that weekday.
-- Occupying appointments (all statuses except `cancelled`) cannot overlap. Adjacent intervals are allowed (`10:00–11:00` then `11:00–12:00`).
+- Occupying appointments (all statuses except `cancelled`) cannot overlap. Adjacent intervals are allowed (`10:00–11:00` then `11:00–12:00`). Phase 6 locks occupying staff/day rows (`lockForUpdate`) before this check. There is no unique time-slot constraint.
 - Only `scheduled` and `confirmed` appointments can be updated or rescheduled.
 
 ## Availability and slots
@@ -127,13 +128,15 @@ Metadata is limited to `appointment_id`, `service_id`, `staff_user_id`, and stat
 - Workspace nav: Appointments
 - `/admin/appointments` — filters, table, create drawer, in-place insert on page 1
 - `/admin/appointments/:id` — details, allowed status actions, reschedule, activity
-- `/admin/customers/:id` — upcoming and recent appointments replace the Phase 4 placeholder
+- `/admin/customers/:id` — upcoming and past appointments (Phase 6 relabeled **Recent** to **Past** and added **Book appointment**)
 
-Loading labels: `Creating...`, `Rescheduling...`, `Confirming...`, `Completing...`, `Cancelling...`. Failed requests leave the form open.
+Loading labels after Phase 6: `Booking...` on create, `Rescheduling...`, `Confirming...`, `Completing...`, `Cancelling...`, and `Loading available times...` while slots load. Failed requests leave the form open.
 
 ## Tests
 
 `tests/Feature/Appointments/AppointmentManagementTest.php` and `tests/Unit/AppointmentStatusTest.php` cover creation, availability, overlap, adjacent slots, past dates, reschedule, status transitions, staff authorization, filters, pagination, activities, and customer embedding.
+
+Phase 6 adds `tests/Feature/Appointments/AppointmentWorkflowTest.php` (qualify → book, manual customer → book, conflict message, staff walk-in rejection). See [16-phase-6-appointment-calendar-workflow.md](16-phase-6-appointment-calendar-workflow.md).
 
 ## Known limitations
 
@@ -141,8 +144,12 @@ Loading labels: `Creating...`, `Rescheduling...`, `Confirming...`, `Completing..
 - Slots are 30-minute increments inside weekday windows. There is no week/month calendar view.
 - Service and user lookups still use the existing 15-row catalog pages.
 - Staff create-form staff picker is self-only because `/users` is manager/admin.
-- Appointments cannot be booked against unconverted leads.
+- Appointments cannot be booked against a lead that has no customer (`customer_id` is null). Qualified, converted, and manually created customers can be booked.
 - No reminders, recurrence, public booking, or external calendar sync.
+
+## Phase 6 refinements
+
+Phase 6 did not change this schema, statuses, or API paths. It made Customer → Book appointment reliable (preselected Customer from a qualified Lead or Customer Detail), locked occupying staff/day rows before overlap checks, and added `AppointmentWorkflowTest.php`. See [16-phase-6-appointment-calendar-workflow.md](16-phase-6-appointment-calendar-workflow.md).
 
 ## Future work
 

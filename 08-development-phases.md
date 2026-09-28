@@ -65,7 +65,7 @@ Depends on customers, services, and staff availability.
 
 A full calendar UI, reminders, recurrence, and public booking remain later work.
 
-## Phase 5B — Public landing page and lead capture (current)
+## Phase 5B — Public landing page and lead capture
 
 - Unauthenticated landing page at `/`
 - `GET /api/v1/public/services` and `POST /api/v1/public/leads`
@@ -74,12 +74,27 @@ A full calendar UI, reminders, recurrence, and public booking remain later work.
 
 Depends on Phase 3. Originally numbered Phase 5; appointments were implemented first as Phase 5A. Public booking remains later work.
 
-## Phase 6 — Calendar visualization
+## Phase 5C — Lead qualification and customer linking
 
-- Internal day/week schedule view
-- Richer slot presentation
+- Confirmation modal before Contacted → Qualified
+- `POST /api/v1/leads/{lead}/qualify` finds or creates a customer in one transaction
+- Email/phone matching with conflict rejection
+- Lead detail shows the linked customer and Book appointment
+- Convert and appointment booking remain separate actions
 
-Depends on Phase 5A appointments.
+Depends on Phase 3 leads and Phase 4 customers.
+
+## Phase 6 — Appointment and calendar workflow (current)
+
+- Customer preselected when booking from a qualified lead or customer detail
+- Upcoming / past appointments on customer detail
+- Transaction lock around same-staff same-day overlap checks
+- Clearer booking validation messages
+- Manual customers can be booked without a lead
+- No new appointment endpoints or migrations
+- `AppointmentWorkflowTest.php` (7 cases); suite reported 166 passed
+
+Depends on Phase 5A appointments and Phase 5C qualification. Qualification still does not create an appointment. A day/week calendar view, Google Calendar, reminders, email/SMS, n8n, and public booking remain later work.
 
 ## Phase 7 — Dashboard
 

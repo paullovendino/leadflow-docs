@@ -8,7 +8,7 @@ This is the intended V1 domain. Phase 5A implements `User`, `Service`, `StaffAva
 | --- | --- |
 | User | Authenticated operator with a role |
 | Lead | Potential customer |
-| Customer | Converted customer |
+| Customer | Established contact (from qualification, conversion, or manual create) |
 | Service | Bookable offering |
 | StaffAvailability | Weekly working hours for a staff user |
 | Appointment | Scheduled service occurrence |
@@ -43,7 +43,7 @@ Service 1—* Appointment
 Appointment 1—* Activity
 
 Appointment belongs to Customer, Service, User (staff)
-Appointments do not belong to unconverted leads
+Appointments belong to Customers, not Leads. A Lead without a linked Customer cannot be booked. Customers may come from qualification, conversion, or manual create.
 ```
 
 ## Lead
@@ -100,6 +100,17 @@ Rules:
 - customers are not hard-deleted
 - staff visibility comes from related assigned leads
 
+## Qualification
+
+Qualifying a contacted lead is an explicit business operation.
+
+- Confirm in the UI before calling the API
+- Find an existing customer by email or phone, or create one
+- Set `leads.customer_id`
+- Move the lead to the `qualified` stage
+- Write `lead_qualified` (and `customer_created` when a customer is new)
+- Do not create an appointment
+
 ## Conversion
 
 Converting a lead is an explicit business operation, not a row copy.
@@ -120,10 +131,13 @@ Rescheduling updates date, time, staff, or service. It is not a separate status.
 
 Rules:
 
-- Appointment belongs to an existing customer, not an unconverted lead
+- Appointment belongs to an existing Customer, not to a Lead
+- Qualification and conversion never create an appointment; booking is a later explicit action
 - Service must be active for new bookings
 - Assigned staff must be an active staff or manager user
 - Same staff member cannot have overlapping occupying appointments
+- Occupying rows for that staff member and date are locked (`lockForUpdate`) before the overlap check
+- There is no unique database constraint on appointment time slots
 - Adjacent intervals are allowed
 - End time is derived from start time plus `Service.duration_minutes`
 - The interval must fit an active availability window for that weekday
@@ -141,6 +155,7 @@ Activities are system-traceable events such as:
 - Note added
 - Appointment created / rescheduled / cancelled / completed
 - Lead converted
+- Lead qualified
 
 ## Open modeling questions
 
@@ -162,10 +177,23 @@ Resolved in Phase 5A:
 8. Overlap uses interval comparison; cancelled appointments do not occupy a slot.
 9. Status transitions are centralized on `AppointmentStatus`.
 
+Resolved in Phase 5C:
+
+10. Contacted → Qualified is a dedicated qualify action with customer matching.
+11. Conflicting email/phone matches are rejected instead of picking a customer silently.
+
+Resolved in Phase 6:
+
+12. Appointment creation remains an explicit Customer action and is separate from Lead qualification.
+13. Overlap checks lock occupying staff/day rows; there is no unique appointment-time constraint.
+14. The booking form may lock the Customer field in UI context when opened from a qualified Lead or Customer Detail.
+
 Still deferred:
 
-- Duplicate customer matching and merge
-- Public booking and a full calendar UI
+- Customer merge UI
+- Public booking
+- Day/week calendar view
+- Google Calendar, email/SMS, reminders, n8n, automated follow-ups
 
 ## Services
 

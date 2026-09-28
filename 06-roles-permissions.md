@@ -46,9 +46,11 @@ Manager limits:
 
 Administrators cannot deactivate or demote the last active administrator. That rule lives in `UserManagementService` because `Gate::before` would otherwise allow it.
 
-Staff customer visibility is derived from assigned related leads. Staff cannot create customers directly; they convert assigned leads.
+Staff customer visibility is derived from assigned related leads. Staff cannot create customers directly. They create or link customers by converting or qualifying assigned leads.
 
-Staff see an appointment when they are the assigned `staff_user_id` or when they can view the customer. Staff may create an appointment only for a customer they can view. Administrators are never bookable staff.
+Staff see an appointment when they are the assigned `staff_user_id` or when they can view the customer. Staff may create an appointment only for a customer they can view. Sending a different `customer_id`, `staff_user_id`, or `appointment_id` cannot bypass policy. Administrators are never bookable staff.
+
+Phase 6 did not change these authorization rules.
 
 ## Public access
 
