@@ -63,7 +63,7 @@ Depends on Phase 3 leads and pipeline stages.
 
 Depends on customers, services, and staff availability.
 
-A full calendar UI, reminders, recurrence, and public booking remain later work.
+A full calendar UI landed in [Phase 8](18-phase-8-calendar-scheduling-ux.md). Reminders, recurrence, and public booking remain later work.
 
 ## Phase 5B — Public landing page and lead capture
 
@@ -94,9 +94,9 @@ Depends on Phase 3 leads and Phase 4 customers.
 - No new appointment endpoints or migrations
 - `AppointmentWorkflowTest.php` (7 cases); suite reported 166 passed
 
-Depends on Phase 5A appointments and Phase 5C qualification. Qualification still does not create an appointment. A day/week calendar view, Google Calendar, reminders, email/SMS, n8n, and public booking remain later work.
+Depends on Phase 5A appointments and Phase 5C qualification. Qualification still does not create an appointment. A day/week calendar view landed in [Phase 8](18-phase-8-calendar-scheduling-ux.md). Google Calendar, reminders, email/SMS, n8n, and public booking remain later work.
 
-## Phase 7 — Dashboard and operational metrics (current)
+## Phase 7 — Dashboard and operational metrics
 
 - Dedicated `GET /api/v1/dashboard` aggregate
 - Overview: total / currently qualified / currently converted leads, customers
@@ -105,13 +105,39 @@ Depends on Phase 5A appointments and Phase 5C qualification. Qualification still
 - Recent leads and recent activity (server-scoped)
 - Application timezone from `APP_TIMEZONE` (`Asia/Manila`)
 
-Depends on Phases 3–6 data. Staff metrics stay scoped. A day/week calendar, Google Calendar, reminders, email/SMS, n8n, public booking, and API performance work remain later.
+Depends on Phases 3–6 data. Staff metrics stay scoped.
 
-## Phase 8 — Integrations (explicit request only)
+## Phase 8 — Calendar and scheduling UX (current)
 
-- Email
-- n8n
-- Google Calendar
-- Webhooks
+- List | Calendar toggle on `/admin/appointments`
+- Day and week grids over `GET /api/v1/appointments` (no calendar endpoint)
+- Desktop week / mobile day
+- Booking from an empty time uses the existing drawer and slot API
+- Past slot starts for today are omitted in `availableSlots()`
+- No drag/drop, month view, or calendar library
+
+Depends on Phase 6 appointment workflow. Google Calendar, n8n, email/SMS, public booking, and API performance work remain later.
+
+## Phase 9 — n8n automation (explicit request only)
+
+Out of scope until requested.
+
+## Phase 10 — Email and notifications (explicit request only)
+
+Out of scope until requested.
+
+## Phase 11 — Google Calendar (explicit request only)
+
+Out of scope until requested.
+
+## Phase 12 — Public booking (explicit request only)
+
+Out of scope until requested.
+
+## Phase 13 — Performance and API optimization
+
+Out of scope until requested. Includes Pipeline TTFB and other serving-layer work.
+
+## Phase 14 — Final QA / production hardening
 
 Out of scope until requested.

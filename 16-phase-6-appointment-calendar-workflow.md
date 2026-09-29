@@ -224,8 +224,8 @@ Qualification itself did not create that appointment; booking was a later explic
 
 ## Intentionally not implemented
 
-- Day calendar view
-- Week calendar view
+- Day calendar view (Phase 8)
+- Week calendar view (Phase 8)
 - Google Calendar / Google OAuth
 - n8n
 - Email or SMS notifications
@@ -236,4 +236,4 @@ Qualification itself did not create that appointment; booking was a later explic
 - Appointment creation during Lead qualification
 - New appointment endpoints or migrations
 
-A richer day/week schedule visualization remains later work. Phase 6 uses the existing appointments table plus the create drawer.
+A richer day/week schedule visualization is [Phase 8](18-phase-8-calendar-scheduling-ux.md). Phase 6 uses the existing appointments table plus the create drawer.

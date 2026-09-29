@@ -141,7 +141,7 @@ API routes always render JSON, including validation and authentication failures.
 | GET | `/api/v1/customers/{customer}/activities` | Sanctum + active | List activities, newest first |
 | GET | `/api/v1/appointments` | Sanctum + active | List appointments (staff: scoped) |
 | POST | `/api/v1/appointments` | Sanctum + active | Create appointment (`scheduled`; application-level overlap check) |
-| GET | `/api/v1/appointments/slots` | Sanctum + active | Suggested available start times |
+| GET | `/api/v1/appointments/slots` | Sanctum + active | Suggested available start times (today: future starts only) |
 | GET | `/api/v1/appointments/{appointment}` | Sanctum + active | View appointment |
 | PATCH | `/api/v1/appointments/{appointment}` | Sanctum + active | Reschedule or update notes |
 | PATCH | `/api/v1/appointments/{appointment}/status` | Sanctum + active | Change status |

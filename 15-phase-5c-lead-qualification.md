@@ -33,7 +33,7 @@ Runs in a single transaction:
 9. Write `lead_qualified` on the lead
 10. Write `customer_created` on a newly created customer
 
-Conflicting matches (email points to customer A, phone to customer B, or two customers share the same email/phone) return `422`. Nothing is written.
+Conflicting matches (two customers share the same email, or two phone matches that are not disqualified by email) return `422`. Nothing is written. A shared phone is ignored when both records have different emails, so a matching email still wins.
 
 A generic `PATCH /api/v1/leads/{lead}/stage` to `qualified` is rejected so the confirmation + qualify action cannot be bypassed.
 
@@ -45,9 +45,10 @@ Customers have no unique email/phone constraints. Matching is application-level:
 | --- | --- |
 | No matching customer | Create customer, then link |
 | One email match | Link that customer |
-| One phone match | Link that customer |
+| One phone match | Link that customer, unless both records have emails and those emails differ |
+| Same phone, different emails | Create a new customer (two people sharing a number) |
 | Same customer matches both | Link that customer |
-| Two different customers | `422`, no mutation |
+| Two different customers | `422` when two remaining matches disagree |
 
 Email comparison uses `LOWER(trim(email))`. Phone comparison strips non-digits and, when there are more than 10 digits, uses the last 10 so `09171234567` and `+63 917 123 4567` match. Stored phone values are not rewritten.
 

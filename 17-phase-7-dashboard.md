@@ -64,7 +64,7 @@ There is no `customer_owner_id` and no Dashboard-only permission.
 ## Intentionally not implemented
 
 - Google Calendar, n8n, email/SMS, reminders
-- Public booking, day/week calendar
+- Public booking, day/week calendar (Phase 8 delivered the internal day/week calendar)
 - Advanced reporting
 - Performance / index / Pipeline TTFB work
 - Automatic Lead stage change on appointment create

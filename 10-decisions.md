@@ -164,7 +164,7 @@ The public site does not expose a staff login link. Authenticated operators can 
 
 ## ADR-040: Qualification is a dedicated customer-linking action
 
-`POST /api/v1/leads/{lead}/qualify` is the only way to move a lead to `qualified`. The UI confirms first. The service matches customers by case-insensitive email and digit-normalized phone, links one match or creates a customer, and records `lead_qualified`. Conflicting matches return `422`. Convert still always creates a new customer at `converted`. Appointments stay a separate action.
+`POST /api/v1/leads/{lead}/qualify` is the only way to move a lead to `qualified`. The UI confirms first. The service matches customers by case-insensitive email and digit-normalized phone, links one match or creates a customer, and records `lead_qualified`. A shared phone is not treated as the same person when both records have different emails. Conflicting matches return `422`. Convert still always creates a new customer at `converted`. Appointments stay a separate action.
 
 This supersedes ADR-029 for the qualification path. Convert does not match duplicates.
 
@@ -181,6 +181,10 @@ The appointment form may lock the Customer field when opened from a qualified Le
 ## ADR-042: Dashboard metrics use a dedicated aggregate endpoint
 
 `GET /api/v1/dashboard` runs scoped counts in `DashboardService`. The SPA must not compose dashboard totals from paginated CRM list endpoints (`per_page=1` + `meta.total`). Staff visibility matches existing lead, customer, and appointment list rules.
+
+## ADR-043: Calendar UX is a visualization over the Appointment API
+
+The day/week calendar on `/admin/appointments` reads `GET /api/v1/appointments` with date filters and `per_page=100` (extra pages concatenated). Booking still goes through `AppointmentFormDrawer` and `POST /api/v1/appointments`. There is no calendar resource, no calendar endpoint, and no client-side conflict engine. Drag/drop rescheduling is out of scope.
 
 ## Environment notes
 

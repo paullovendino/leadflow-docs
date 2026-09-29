@@ -141,7 +141,7 @@ Phase 6 adds `tests/Feature/Appointments/AppointmentWorkflowTest.php` (qualify â
 ## Known limitations
 
 - App timezone is `config('app.timezone')` from `APP_TIMEZONE` (Phase 7: `Asia/Manila` in local `.env` and PHPUnit). Past-date checks use that clock.
-- Slots are 30-minute increments inside weekday windows. There is no week/month calendar view.
+- Slots are 30-minute increments inside weekday windows. Phase 8 adds a day/week visualization; it does not change slot generation except omitting past starts for today.
 - Service and user lookups still use the existing 15-row catalog pages.
 - Staff create-form staff picker is self-only because `/users` is manager/admin.
 - Appointments cannot be booked against a lead that has no customer (`customer_id` is null). Qualified, converted, and manually created customers can be booked.
@@ -153,7 +153,7 @@ Phase 6 did not change this schema, statuses, or API paths. It made Customer â†’
 
 ## Future work
 
-- Lightweight day/week schedule visualization
+- Lightweight day/week schedule visualization (Phase 8)
 - Reminders and no-show follow-up
 - Recurring appointments
 - Public / anonymous booking

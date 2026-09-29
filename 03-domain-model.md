@@ -180,7 +180,7 @@ Resolved in Phase 5A:
 Resolved in Phase 5C:
 
 10. Contacted → Qualified is a dedicated qualify action with customer matching.
-11. Conflicting email/phone matches are rejected instead of picking a customer silently.
+11. Conflicting email/phone matches are rejected instead of picking a customer silently. A shared phone is not enough to link two records that already have different emails.
 
 Resolved in Phase 6:
 

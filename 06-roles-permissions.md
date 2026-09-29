@@ -51,6 +51,8 @@ Staff customer visibility is derived from assigned related leads. Staff cannot c
 
 Staff see an appointment when they are the assigned `staff_user_id` or when they can view the customer. Staff may create an appointment only for a customer they can view. Sending a different `customer_id`, `staff_user_id`, or `appointment_id` cannot bypass policy. Administrators are never bookable staff.
 
+The Phase 8 calendar uses the same `GET /api/v1/appointments` scope. Staff do not get an All Staff calendar. Admin and Manager keep the existing staff filter.
+
 The Phase 7 dashboard uses those same scopes. Staff **Reports** in the table above remains a later reporting product; it is not implemented.
 
 ## Public access
